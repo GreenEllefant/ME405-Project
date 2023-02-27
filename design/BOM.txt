@@ -1,0 +1,40 @@
+Misc McMaster Carr:
+90316A165 - 6-32 Screws
+90730A007 - 6-32 Nuts
+3764N118  - Placeholder 60 tooth pulley
+
+------------------------------------------------------------
+Unlubricated Turntable
+Purpose : Rotating interface between plates
+Descript: 3" Square, 200 lb. Capacity, Galvanized Steel. Appears to be for #6 screws
+Cost    : $4
+Link    : https://www.mcmaster.com/6031K16/
+
+------------------------------------------------------------
+GT2 Timing belt kit
+Purpose : Transfer power from motors to moving parts
+Descript: Two sets of belt+20t wheel+60t wheel
+Cost    : $17
+Link    : https://www.amazon.com/PAGOW-Synchronous-Aluminum-Timing-Pulley/dp/B08DNLWQPM/ref=sr_1_3?crid=GCE010YXTLUI&keywords=GT2%2Btiming%2Bbelt%2Bkit&qid=1677474104&sprefix=gt2%2Btiming%2Bbelt%2Bkit%2Caps%2C164&sr=8-3&th=1
+
+------------------------------------------------------------
+Sydien Flange SHaft Coupling (5mm shaft)
+Purpose : Connect base to shaft
+Descript: Sydien 4Pcs Silver 5mm Rigid Flange Shaft Coupling Motor Guide Shaft Coupler Connector
+Cost    : $8 for pack of 4
+Link    : https://www.amazon.com/Sydien-Flange-Coupling-Coupler-Connector/dp/B07R9JHCBW?th=1
+
+
+------------------------------------------------------------
+5mm Steel Rods
+Purpose : Rotary shafts
+Descript: uxcell 5mm x 250mm 304 Stainless Steel Solid Round Rod for DIY Craft - 5pcs
+Cost    : $8 for pack of 4 (250mm length)
+Link    : https://www.amazon.com/uxcell-250mm-Stainless-Steel-Solid/dp/B082ZNJR7D/ref=sr_1_3?keywords=5mm%2Brod&qid=1677479154&sr=8-3&th=1
+
+------------------------------------------------------------
+Template
+Purpose : 
+Descript: 
+Cost    : 
+Link    : 

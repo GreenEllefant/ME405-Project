@@ -1,0 +1,13 @@
+Pulleys:
+- Run calcs for belt length
+- Lock in gear ratio
+
+60 tooth pulley
+- Verify dimensions
+
+Syden Flange Shaft Coupling
+- Measure mounting hole locations
+
+Base Plate
+- Make size smaller for cost saving
+- Select and source material
