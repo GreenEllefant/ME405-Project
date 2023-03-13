@@ -16,21 +16,39 @@ import cotask
 import task_share
 from mlx_cam import MLX_Cam
 from machine import I2C
+from pi_control import PI_Control
+from motor_driver import Motor_Driver
+from encoder_reader import Encoder_Reader
 
 def pitch_motor_task(shares):
     """!AS
     Task which puts things into a share and a queue.
     @param shares A list holding the share and queue used by this task
     """
-    the_queue = shares
+    yaw_position, pitch_position, yaw_boolean, pitch_boolean = shares
+    en1_pin = pyb.Pin(pyb.Pin.board.PB6, pyb.Pin.IN)
+    en2_pin = pyb.Pin(pyb.Pin.board.PB7, pyb.Pin.IN)
+    timer3 = pyb.Timer(4, prescaler=0, period=0xFFFF)
+    e = Encoder_Reader(en1_pin, en2_pin, timer3)
+    
+    # Set up motor for the B pins
+    en_pin = pyb.Pin(pyb.Pin.board.PA10, pyb.Pin.OUT_OD, pyb.Pin.PULL_UP)
+    in1pin = pyb.Pin(pyb.Pin.board.PB4, pyb.Pin.OUT_PP)
+    in2pin = pyb.Pin(pyb.Pin.board.PB5, pyb.Pin.OUT_PP)
+    tim = pyb.Timer(3, prescaler = 0 , period = 0xFFFF)
+    m = Motor_Driver(en_pin, in1pin, in2pin, tim)
+    
+    
+    # Set up control class
+    Kp = 0.05
+    Ki = 0.001
+    
+    c = PI_Control(Kp, Ki, 0, e, m)
     
     # Get references to the share and queue which have been passed to this task
-    I2C = pyb.I2C(1, pyb.I2C.CONTROLLER)
-    accel = MMA845x(I2C, 29)
-    accel.active()
     yield 0
     while True:
-        the_queue.put(accel.get_ax())
+        c.run(4000)
         yield 0
 
 
@@ -60,25 +78,30 @@ def camera_task(shares):
     i2c_bus = I2C(1)
     i2c_address = 0x33
     camera = MLX_Cam(i2c_bus)
+    runs = 0
     yield 0
     
     while True:
         # Show everything currently in the queue and the value in the share
-        image = camera.get_image()
-        index = 0
-        highest_index = 0
-        highest = -999999
-        for i in image:
-            if i > highest:
-                highest_index = index
-                highest = i
-            index += 1
+        if runs >= 4:
+            yield 0
+        else:
+            image = camera.get_image()
+            index = 0
+            highest_index = 0
+            highest = -999999
+            for i in image:
+                if i > highest:
+                    highest_index = index
+                    highest = i
+                index += 1
         
-        print(highest_index % 32, 24 - int(highest_index / 24))
-        yaw_position.put(24 - int(highest_index / 24))
-        pitch_position.put(highest_index % 32)
-        #camera.ascii_art(image)
-        yield 0
+            print(highest_index % 32, 24 - int(highest_index / 24))
+            yaw_position.put(24 - int(highest_index / 24))
+            pitch_position.put(highest_index % 32)
+            #camera.ascii_art(image)
+            runs += 1
+            yield 0
 
 def fire_task(shares):
     """!
@@ -113,15 +136,15 @@ if __name__ == "__main__":
     # allocated for state transition tracing, and the application will run out
     # of memory after a while and quit. Therefore, use tracing only for 
     # debugging and set trace to False when it's not needed
-    #task1 = cotask.Task(pitch_motor_task, name="pitch_motor_task", priority=1, period=2,
-    #                    profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean))
+    task1 = cotask.Task(pitch_motor_task, name="pitch_motor_task", priority=1, period=5,
+                        profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean))
     #task2 = cotask.Task(yaw_motor_task, name="yaw_motor_task", priority=2, period=2,
     #                    profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean))
     task3 = cotask.Task(camera_task, name="camera_task", priority=2, period=1250,
                         profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean))
     #task4 = cotask.Task(fire_task, name="fire_ta", priority=2, period=2,
     #                    profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean))
-    #cotask.task_list.append(task1)
+    cotask.task_list.append(task1)
     #cotask.task_list.append(task2)
     cotask.task_list.append(task3)
     #cotask.task_list.append(task4)

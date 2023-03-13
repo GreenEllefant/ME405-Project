@@ -5,6 +5,8 @@ RAW VERSION
 This version uses a stripped down MLX90640 driver which produces only raw data,
 not calibrated data, in order to save memory.
 
+Red to 3v3, Black to GND, yellow to SCL, blue to SDA
+
 This file contains a wrapper that facilitates the use of a Melexis MLX90640
 thermal infrared camera for general use. The wrapper contains a class MLX_Cam
 whose use is greatly simplified in comparison to that of the base class,
