@@ -9,27 +9,24 @@ this will be a class that establishes the firing capabilities of the blaster
 
         
 class fire:
-    def __init__(self, m1_pin, m2_pin, target_ac):
+    def __init__(self, m1_pin, m2_pin):
         self.m1_pin = m1_pin
         self.m2_pin = m2_pin
-        self.target_ac = target_ac
 
 
-    def flywheel(self, timeset):
+    def flywheel(self, highlow):
         #turn on motor 1 to get flywheel up to speed
-        
+        if(highlow):
+            self.m1_pin.high()
+        else:
+            self.m1_pin.low()
         pass
     
     def piston(self):
-        #turn on motor 2 to push dart into flywheel
-        pass
+        self.m2_pin.high()
     
-    def release(self, target_ac):
-        if target_ac == 1:          #check if target_ac == 1 (or some other agreed value)
-                                    #turn flywheel on: delay ~3 seconds
-            pass
-        else:
-            pass                    #if flywheel is on turn on piston else don't move piston
+    def release(self):
+        self.m2_pin.low()                  #if flywheel is on turn on piston else don't move piston
         
 
 
