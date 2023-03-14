@@ -6,7 +6,7 @@
 Description: 
 this will be a class that establishes the firing capabilities of the blaster
 '''
-
+import utime
         
 class fire:
     def __init__(self, m1_pin, m2_pin):
@@ -27,6 +27,22 @@ class fire:
     
     def release(self):
         self.m2_pin.low()                  #if flywheel is on turn on piston else don't move piston
+
+if __name__ == "__main__":
+    m1_pin = pyb.Pin(pyb.Pin.board.PC2, pyb.Pin.OUT_PP)
+    m2_pin = pyb.Pin(pyb.Pin.board.PC3, pyb.Pin.OUT_PP)
+    fire = fire(m1_pin, m2_pin)
+    time = utime.ticks_ms()
+    fire.flywheel(True)
+    while(utime.ticks_ms() - time) < 2000:
+        pass
+    time = utime.ticks_ms()
+    fire.piston()
+    while(utime.ticks_ms() - time) < 700:
+        pass
+    fire.release()
+    fire.flywheel(False)
+   
         
 
 
