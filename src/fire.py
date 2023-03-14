@@ -33,12 +33,12 @@ if __name__ == "__main__":
     m2_pin = pyb.Pin(pyb.Pin.board.PC3, pyb.Pin.OUT_PP)
     fire = fire(m1_pin, m2_pin)
     time = utime.ticks_ms()
-    fire.flywheel(True)
-    while(utime.ticks_ms() - time) < 2000:
-        utime.sleep_ms(1)
-    time = utime.ticks_ms()
+    #fire.flywheel(True)
+    #while(utime.ticks_ms() - time) < 3000:
+    #    utime.sleep_ms(1)
+    #time = utime.ticks_ms()
     fire.piston()
-    while(utime.ticks_ms() - time) < 700:
+    while(utime.ticks_ms() - time) < 5000:
         utime.sleep_ms(1)
     fire.release()
     fire.flywheel(False)
