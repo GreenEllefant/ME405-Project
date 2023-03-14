@@ -35,11 +35,11 @@ if __name__ == "__main__":
     time = utime.ticks_ms()
     fire.flywheel(True)
     while(utime.ticks_ms() - time) < 2000:
-        pass
+        utime.sleep_ms(1)
     time = utime.ticks_ms()
     fire.piston()
     while(utime.ticks_ms() - time) < 700:
-        pass
+        utime.sleep_ms(1)
     fire.release()
     fire.flywheel(False)
    
