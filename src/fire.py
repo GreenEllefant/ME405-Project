@@ -45,4 +45,3 @@ if __name__ == "__main__":
     fire.release()
     fire.flywheel(False)
     #zero_pin = pyb.Pin(pyb.Pin.board.PC4, pyb.Pin.IN)
-        
