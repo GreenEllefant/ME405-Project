@@ -123,8 +123,10 @@ class PI_Control:
             print(str(self.values[0][i]) + "," + str(self.values[1][i]))
         
     def get_pwm(self):
-        print(self.pwm)
-        
+        #print(self.setpoint - self.encoder.read())
+        #print(self.pwm)
+        pass
+    
     def get_pwm_P(self):
         print(self.pwm_P)
         
@@ -137,37 +139,39 @@ class PI_Control:
 # Run this test code when the file is run
 if __name__ == "__main__":
     # Set up encoder pins
-    en1_pin = pyb.Pin(pyb.Pin.board.PC6, pyb.Pin.IN)
-    en2_pin = pyb.Pin(pyb.Pin.board.PC7, pyb.Pin.IN)
-    timer3 = pyb.Timer(8, prescaler=0, period=0xFFFF)
+    en1_pin = pyb.Pin(pyb.Pin.board.PB6, pyb.Pin.IN)
+    en2_pin = pyb.Pin(pyb.Pin.board.PB7, pyb.Pin.IN)
+    timer3 = pyb.Timer(4, prescaler=0, period=0xFFFF)
     e = Encoder_Reader(en1_pin, en2_pin, timer3)
     
     # Set up motor for the B pins
-    en_pin = pyb.Pin(pyb.Pin.board.PC1, pyb.Pin.OUT_OD, pyb.Pin.PULL_UP)
-    in1pin = pyb.Pin(pyb.Pin.board.PA0, pyb.Pin.OUT_PP)
-    in2pin = pyb.Pin(pyb.Pin.board.PA1, pyb.Pin.OUT_PP)
-    timer5 = pyb.Timer(5, prescaler = 0, period = 0xFFFF)
-    m = Motor_Driver(en_pin, in1pin, in2pin, timer5)
+    en_pin = pyb.Pin(pyb.Pin.board.PA10, pyb.Pin.OUT_OD, pyb.Pin.PULL_UP)
+    in1pin = pyb.Pin(pyb.Pin.board.PB4, pyb.Pin.OUT_PP)
+    in2pin = pyb.Pin(pyb.Pin.board.PB5, pyb.Pin.OUT_PP)
+    tim = pyb.Timer(3, prescaler = 0 , period = 0xFFFF)
+    m = Motor_Driver(en_pin, in1pin, in2pin, tim)
     
     # Set up control class
-    Kp = 0.000001       # Motor control parameter
-    Ki = 0.02
-    Kd = 0.00003
+    Kp = 0.05       # Motor control parameter
+    Ki = 0.0
+    Kd = 0.0
     freq = 1/.002
     c = PI_Control(Kp, Ki, Kd, freq, 0, e, m)
     
     time = utime.ticks_ms()
     itime = time
     # Get references to the share and queue which have been passed to this task
+    degrees = 10
+    scale = 2000
     print("// Run Forward")
-    while utime.ticks_ms()- itime < 3000:
+    while utime.ticks_ms()- itime < 10000:
         utime.sleep_ms(2)
-        c.run(-21657)
+        c.run(degrees * scale)
         c.get_pwm()
     print("// Return to start")
-#     while utime.ticks_ms() - itime < 6000:
-#         utime.sleep_ms(2)
-#         c.run(0)
-#         c.get_pwm()
+    #while utime.ticks_ms() - itime < 20000:
+    #    utime.sleep_ms(2)
+    #    c.run(0)
+    #    c.get_pwm()
     m.set_duty_cycle(0)
     print("// TEST COMPLETE //")

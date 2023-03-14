@@ -31,6 +31,7 @@ def yaw_motor_task(shares):
     en2_pin = pyb.Pin(pyb.Pin.board.PB7, pyb.Pin.IN)
     timer3 = pyb.Timer(4, prescaler=0, period=0xFFFF)
     e = Encoder_Reader(en1_pin, en2_pin, timer3)
+    angles = [190, 188, 186, 184, 182, 180, 178, 176, 174, 172, 170]
     
     # Set up motor for the B pins
     en_pin = pyb.Pin(pyb.Pin.board.PA10, pyb.Pin.OUT_OD, pyb.Pin.PULL_UP)
@@ -41,18 +42,25 @@ def yaw_motor_task(shares):
     
     
     # Set up control class
-    Kp = 0.5
-    Ki = 0.001
-    
-    c = PI_Control(Kp, Ki, 0, e, m)
+    Kp = 0.05       # Motor control parameter
+    Ki = 0.0
+    Kd = 0.0
+    freq = 1/.002
+    c = PI_Control(Kp, Ki, Kd, freq, 0, e, m)
+    scale = 2000
     
     # Get references to the share and queue which have been passed to this task
     yield 0
     while True:
         if(yaw_position.get() == -1):
-            c.run(100000)
+            c.run(180 * scale)
         else:
-            c.run(200000)
+            index = yaw_position.get() - 8
+            if(index) <= 0:
+                index = 0
+            if(index) >= 11:
+                index = 10
+            c.run(angles[index] * scale)
             #c.run(yaw_position.get())
         yield 0
 
@@ -102,7 +110,7 @@ def camera_task(shares):
     i2c_bus = I2C(1)
     i2c_address = 0x33
     camera = MLX_Cam(i2c_bus)
-    runs = -20
+    runs = 0
     yield 0
     
     while True:
@@ -144,8 +152,8 @@ def fire_task(shares):
     yield 0
     while True:
         # Show everything currently in the queue and the value in the share
-        if(timer_boolean.get() >= 1):
-            print("Spinning Flywheel")
+        #if(timer_boolean.get() >= 1):
+        #    print("Spinning Flywheel")
         yield 0
     
 def timer_task(shares):
@@ -187,8 +195,8 @@ if __name__ == "__main__":
     # allocated for state transition tracing, and the application will run out
     # of memory after a while and quit. Therefore, use tracing only for 
     # debugging and set trace to False when it's not needed
-    task1 = cotask.Task(pitch_motor_task, name="pitch_motor_task", priority=3, period=10,
-                        profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean))
+    #task1 = cotask.Task(pitch_motor_task, name="pitch_motor_task", priority=3, period=10,
+    #                    profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean))
     task2 = cotask.Task(yaw_motor_task, name="yaw_motor_task", priority=3, period=10,
                         profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean))
     task3 = cotask.Task(camera_task, name="camera_task", priority=1, period=500,
@@ -198,7 +206,7 @@ if __name__ == "__main__":
     task5 = cotask.Task(timer_task, name="timer_task", priority=0, period=100,
                         profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean))
     
-    cotask.task_list.append(task1)
+    #cotask.task_list.append(task1)
     cotask.task_list.append(task2)
     cotask.task_list.append(task3)
     cotask.task_list.append(task4)
