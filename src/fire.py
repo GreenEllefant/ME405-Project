@@ -2,7 +2,6 @@
 '''! @file fire.py
 @author Hannah Howe
 @fire
-
 Description: 
 this will be a class that establishes the firing capabilities of the blaster
 '''
@@ -46,6 +45,3 @@ if __name__ == "__main__":
     fire.release()
     fire.flywheel(False)
     #zero_pin = pyb.Pin(pyb.Pin.board.PC4, pyb.Pin.IN)
-        
-
-
