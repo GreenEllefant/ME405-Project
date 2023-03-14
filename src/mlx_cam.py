@@ -65,6 +65,7 @@ class MLX_Cam:
         # The MLX90640 object that does the work
         self._camera = MLX90640(i2c, address)
         self._camera.set_pattern(pattern)
+        self._camera.refresh_rate = 64
         self._camera.setup()
 
         ## A local reference to the image object within the camera driver
