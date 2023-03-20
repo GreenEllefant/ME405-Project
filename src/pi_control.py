@@ -2,7 +2,7 @@
     This file contains the Position Control class
     
     @author Jack Ellsworth, Hannah Howe, Mathew Smith
-    @date   05-Feb-2023
+    @date   14-Mar-2023
     @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
 import utime

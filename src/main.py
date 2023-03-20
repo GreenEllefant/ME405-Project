@@ -1,13 +1,10 @@
 """!
-@file basic_tasks.py
-    This file contains a demonstration program that runs some tasks, an
-    inter-task shared variable, and a queue. The tasks don't really @b do
-    anything; the example just shows how these elements are created and run.
+@file main.py
+    This file contains the multitasking for controlling and firing the turret
 
-@author JR Ridgely
-@date   2021-Dec-15 JRR Created from the remains of previous example
-@copyright (c) 2015-2021 by JR Ridgely and released under the GNU
-    Public License, Version 2. 
+@author Jack Ellsworth, Hannah Howe, Mathew Smith
+@date   14-Mar-2023
+@copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
 import utime
 import gc
@@ -22,9 +19,9 @@ from encoder_reader import Encoder_Reader
 
 def yaw_motor_task(shares):
     """!
-    ~ 2000 Ticks / Degree
-    Task which puts things into a share and a queue.
-    @param shares A list holding the share and queue used by this task
+    This function contains the task for controlling the yaw motor. 
+
+    @param shares A list holding the shared variables used by this task
     """
     yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean = shares
     en1_pin = pyb.Pin(pyb.Pin.board.PB6, pyb.Pin.IN)
@@ -67,9 +64,9 @@ def yaw_motor_task(shares):
 
 def pitch_motor_task(shares):
     """!
-    Task which takes things out of a queue and share and displays them.
-    ~ 225 Ticks per degree
-    @param shares A tuple of a share and queue from which this task gets data
+    This function contains the task for controlling the pitch motor. 
+
+    @param shares A list holding the shared variables used by this task
     """
     yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean = shares
     en1_pin = pyb.Pin(pyb.Pin.board.PC6, pyb.Pin.IN)
@@ -101,8 +98,9 @@ def pitch_motor_task(shares):
 
 def camera_task(shares):
     """!
-    Task which takes things out of a queue and share and displays them.
-    @param shares A tuple of a share and queue from which this task gets data
+    This function contains the task for image capturing and analyzing the thermal camera
+
+    @param shares A list holding the shared variables used by this task
     """
     # Get references to the share and queue which have been passed to this task
     yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean = shares
@@ -143,8 +141,9 @@ def camera_task(shares):
 
 def fire_task(shares):
     """!
-    Task which takes things out of a queue and share and displays them.
-    @param shares A tuple of a share and queue from which this task gets data
+    This function contains the task for firing the turret. 
+
+    @param shares A list holding the shared variables used by this task
     """
     # Get references to the share and queue which have been passed to this task
     yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean = shares
@@ -158,8 +157,9 @@ def fire_task(shares):
     
 def timer_task(shares):
     """!
-    Task which takes things out of a queue and share and displays them.
-    @param shares A tuple of a share and queue from which this task gets data
+    This function contains the task for timing events between tasks. 
+
+    @param shares A list holding the shared variables used by this task
     """
     # Get references to the share and queue which have been passed to this task
     yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean = shares
