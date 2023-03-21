@@ -1,7 +1,7 @@
 # ME 405 Term Project
 This directory contains the code required to run an automated nerf turret using an mlx90640 thermal camera with an STM32 chip running micropython. The turret was built as the final term project for the ME405 mechatronics class at Cal Poly. The purpose of the design was to integrate simultaneous task execution with a custom mechanical design.
 
-![Prototyping_1](img/Prototyping_1.jpg)
+![ProjectImage](img/ProjectImage.jpg)
 <p align=center> <b> Figure 1: </b>Turret Prototype
 
 ## Overview of Hardware
