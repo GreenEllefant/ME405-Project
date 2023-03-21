@@ -92,7 +92,7 @@ def pitch_motor_task(shares):
         if(pitch_position.get() == -1):
             c.run(0)
         else:
-            c.run(2000)
+            c.run(0)
             #c.run(pitch_position.get())
         yield 0
 
@@ -195,8 +195,8 @@ if __name__ == "__main__":
     # allocated for state transition tracing, and the application will run out
     # of memory after a while and quit. Therefore, use tracing only for 
     # debugging and set trace to False when it's not needed
-    #task1 = cotask.Task(pitch_motor_task, name="pitch_motor_task", priority=3, period=10,
-    #                    profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean))
+    task1 = cotask.Task(pitch_motor_task, name="pitch_motor_task", priority=3, period=10,
+                        profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean))
     task2 = cotask.Task(yaw_motor_task, name="yaw_motor_task", priority=3, period=10,
                         profile=True, trace=False, shares=(yaw_position, pitch_position, yaw_boolean, pitch_boolean, timer_boolean))
     task3 = cotask.Task(camera_task, name="camera_task", priority=1, period=500,

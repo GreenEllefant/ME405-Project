@@ -13,5 +13,7 @@ The microcontroller and the breadboard circuit for firing the gun are attached t
 ## Overview of Software
 Our software preforms three main jobs, controlling the motors, determine where the target is from the camera, and timing the firing with motors to ensure it is only fired at a certain point. The camera only begin firing after 5 seconds have passed, since this it when the target will stop moving. The rifle will only fire once the motors indicate that they are withing a certain tolerance of the target. More indepth overview of our code can be found at (INSERT DOXYGEN LINK HERE)
 
+![Task Diagram](TaskDiagram.png)
+
 ## Results
 Due to quality of parts and time constrains, our physical system did not preform as well as intended. Due to our gears for the pitch control being too weak, we could not control the pitch of the gun accurately. This meant that our final design did not have any pitch control. The mosfets we were using for our firing mechanism lost power during our testing, resulting in our firing mechanism also failing. The only part of our design that performed adequately was the yaw accuracy. The turret was able to reach it's desired location, which was determined by the thermal camera, almost every time.
