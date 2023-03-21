@@ -63,35 +63,38 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Learn by Deuling - Nerf Gun Project </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="ss_timeline"></a>
-Project Timeline</h1>
-<p>We laid out our timeline begining with the design and ending with coding and testing.</p>
+<div class="textblock"><h1><a class="anchor" id="ss_introduction"></a>
+Software Summary</h1>
+<p>Our completes three main functions, taking an image with the thermal camera to determine the targets position, moving the motors to aim the nerf rifle to the target position, and firing the rifle once certain parameters have been met. The gives us five total tasks, one for each motor that positions the rifle, one for capturing and processing the image from the thermal camera, one for firing the rifle, and one for timing the image taking and firing to occur at specific moments in time.</p>
 <div class="image">
-<img src="WorkflowTimeline.png" alt="" width="800cm"/>
+<img src="TaskDiagram.png" alt="" width="800cm"/>
 </div>
-<h1><a class="anchor" id="ss_Aiming"></a>
-Software Design</h1>
-<p>The software is divided into the 'mastermind' aiming protocol, which steps through the various phases of the program. It remains to be determined if this will be performed by a separate file or the cotask.py setup given in class. This protocol interfaces between the motors, thermal camera, and firing controls described in the following subsections.</p>
+<h2><a class="anchor" id="ss_Camera"></a>
+Camera Task</h2>
+<p>The image that is captured by the camera is stored as an iterable image data type with 768 total values. Each value corresponds to a thermal value captured by the camera. The higher the value, the hotter that spot in space is. Since the human would be the hottest item in the frame of the thermal camera, we can assume that the brightest spot in the frame is a human. Taking the index of the brightest value, we can split it into a yaw index and pitch index according to the orientation of our thermal camera. Each index corresponds to a specific pitch or yaw angle for the rifle. The camera will only take images after the target as stopped moving in order to remove any possible bugs. Additionally, only four images are taken so the task does not interfere with the motor control. This task has the longest period since it takes the most amount of time to complete.</p>
 <div class="image">
-<img src="FSM_Aiming.png" alt="" width="800cm"/>
+<img src="CameraStateDiagram.png" alt="" width="800cm"/>
 </div>
 <h2><a class="anchor" id="ss_motor"></a>
-Motor FSM</h2>
-<p>The Motor FSM describes the behavior of both the yaw and pitch motors (though each acts independantly of one another). This FSM simply waits for a target position and when given a position, moves to that position and holds. This will be accomplished by implementing a PI controller.</p>
+Motor Task</h2>
+<p>The motor control uses a simple positional control. Our class can preform PID control, but we did not take advantage of this fact. In our testing, we found that basic positional control worked best for our purposes. The positional control class works based on the ticks of the encoder. Based on gear ratios, we can change the ticks from the encoder to degrees in the real world. We are able to read the encoder and compare it to the desired value to determine how hard we want to run the motors. This task has the highest period rate since it needs to be run multiple times in order for accurate data from the encoder. Once the motors are within a certain distance from the target, it tells the fire task to fire the rifle.</p>
 <div class="image">
-<img src="FSM_Motor.png" alt="" width="800cm"/>
+<img src="PitchStateDiagram.png" alt="" width="800cm"/>
 </div>
-<h2><a class="anchor" id="ss_camera"></a>
-Thermal Camera FSM</h2>
-<p>The thermal camera FSM describes the behavior of the interface with the thermal camera. The system will retrieve data from the thermal camera to specify the target motor positions, and will not retrieve data while the system is on standby.</p>
-<div class="image">
-<img src="FSM_ThermalCamera.png" alt="" width="800cm"/>
+ <div class="image">
+<img src="YawStateDiagram.png" alt="" width="800cm"/>
 </div>
 <h2><a class="anchor" id="ss_firing"></a>
-Firing FSM</h2>
-<p>The firing FSM describes the behavior of the firing system, which waits until both motors are in position before activating the firing switches on our nerf gun.</p>
+Firing Task</h2>
+<p>The firing task waits until a certain amount of time has elapsed. Once that time has elapsed, it will turn on the flywheels and wait until the rifle is in position to fire. Once the motor tasks have determined that rifle is in position, the firing task then fires the rifle at the target.</p>
 <div class="image">
-<img src="FSM_Firing.png" alt="" width="800cm"/>
+<img src="FireStateDiagram.png" alt="" width="800cm"/>
+</div>
+<h2><a class="anchor" id="ss_timing"></a>
+Timing Task</h2>
+<p>The timing task simply calculates how long the program as been running. It does this so that it can time when to capture images and when it is able to fire safely without losing points. Once four seconds have passed, it tells the firing task to start spinning the flywheels. After 5 seconds, the timing task tells the camera task to start capturing images. Since timing is critical to the execution of the program, this task has the highest priority.</p>
+<div class="image">
+<img src="TimingStateDiagram.png" alt="" width="800cm"/>
 </div>
  </div></div><!-- PageDoc -->
 </div><!-- contents -->

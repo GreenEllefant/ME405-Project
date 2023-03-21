@@ -25,11 +25,23 @@
 var NAVTREE =
 [
   [ "Learn by Deuling - Nerf Gun Project", "index.html", [
-    [ "Project Timeline", "index.html#ss_timeline", null ],
-    [ "Software Design", "index.html#ss_Aiming", [
-      [ "Motor FSM", "index.html#ss_motor", null ],
-      [ "Thermal Camera FSM", "index.html#ss_camera", null ],
-      [ "Firing FSM", "index.html#ss_firing", null ]
+    [ "Software Summary", "index.html#ss_introduction", [
+      [ "Camera Task", "index.html#ss_Camera", null ],
+      [ "Motor Task", "index.html#ss_motor", null ],
+      [ "Firing Task", "index.html#ss_firing", null ],
+      [ "Timing Task", "index.html#ss_timing", null ]
+    ] ],
+    [ "Namespaces", "namespaces.html", [
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ]
+    ] ],
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ]
@@ -39,7 +51,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"dir_68267d1309a1af8e8297ef4c3efbcdba.html"
+"annotated.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
