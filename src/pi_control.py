@@ -1,11 +1,11 @@
-"""! 
+'''! 
 @file pi_control.py
     This file contains the Position Control class
     
     @author Jack Ellsworth, Hannah Howe, Mathew Smith
     @date   14-Mar-2023
     @copyright (c) 2023 by Nobody and released under GNU Public License v3
-"""
+'''
 import utime
 from encoder_reader import Encoder_Reader
 from motor_driver import Motor_Driver

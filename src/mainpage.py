@@ -20,7 +20,7 @@ The motor control uses a simple positional control. Our class can preform PID co
 \image html YawStateDiagram.png width=800cm
 
 @subsection ss_firing Firing Task
-The firing task waits until a certain amount of time has elapsed. Once that time has elapsed, it will turn on the flywheels and wait until the rifle is in position to fire. Once the motor tasks have determined that rifle is in position, the firing task then fires the rifle at the target.
+The firing task waits until a certain amount of time has elapsed. Once that time has elapsed, it will turn on the flywheels and wait until the rifle is in position to fire. Once the motor tasks have determined that rifle is in position, the firing task then fires the rifle at the target. This task was not able to be test and implemented due to electrical failure described in the documentation. Ultimately this means that the main function does not reference the fire class in its code.
 
 \image html FireStateDiagram.png width=800cm
 
