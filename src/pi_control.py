@@ -1,4 +1,5 @@
 """! 
+@file pi_control.py
     This file contains the Position Control class
     
     @author Jack Ellsworth, Hannah Howe, Mathew Smith
@@ -154,7 +155,7 @@ class PI_Control:
         
     def get_pwm_D(self):
         """!
-        Print the differential pwm
+        Print the differential  pwm
         """
         print(self.pwm_D)
         
