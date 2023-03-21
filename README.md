@@ -1,8 +1,17 @@
 # ME 405 Term Project
-This directory contains the code required to run turret using an mlx90640 thermal camera with an STM32 chip running micropython. The turret was built as the final term project for the mechatronics class at Cal Poly. The purpose of the design was to intergrate simulatious task execution with a custom mechanical design.
+This directory contains the code required to run an automated nerf turret using an mlx90640 thermal camera with an STM32 chip running micropython. The turret was built as the final term project for the ME405 mechatronics class at Cal Poly. The purpose of the design was to intergrate simulatious task execution with a custom mechanical design.
+
+![Prototyping_1](img/Prototyping_1.jpg)
+<p align=center> <b> Figure 1: </b>Turret Prototype
 
 ## Overview of Hardware
-Our hardware consists of a fully automatic nerf rifle placed on a pivoting stand that rotates on a turn table. The rifle is held upside down by the railing at the top of the rifle. 3D printed parts are bolted to a plate that is connected to a stand. The stand allows the plate to rotate in the pitch direction. The plate rotates through a belt that is attached to a motor. The motor is attached to the same turntable that the stand is on, ensuring that the motor and the stand are always in the same orientation.
+Our hardware consists of a fully automatic nerf rifle placed on a pivoting stand that rotates on a turn table. The rifle mounting is custom 3D printed to allow for specific geometry that fits our off the shelf parts (including the rifle). We bypassed some of the internal electronics via breadboard, which is mounted to our acrylic turntable. The tilt of the stand and the rotation of the turntable are controlled by our tub motors, which are connected to our MCU that is also mounted to our turntable. The thermal camera and yaw motor are mounted to our fixed wooden base, and our cable routing accomodates for its rotation.
+| (a) Full CAD | (b) Color Coded |
+|     :---:    |     :---:      |
+| ![CAD_FULL_ISO](CAD_FULL_ISO.png) | ![CAD_FULL_COLOR](img/CAD_FULL_COLOR.png) |
+<p align=center> <b> Figure 2: </b> Full CAD Design
+
+We used a pair of 3D printed parts to connect to the rifle as shown in purple in figure 2b. These parts are screwed onto an acrylic plate shown 
 
 For the yaw control, the motors are attached to the outside of the turntable. The turntable has teeth on the perimeter, allowing it to interact with the turntable. The wires are conncted through the middle of the table. The wires are long enough that the orientation of the stand does not effect the connection between the microcontroller and the motor.
 
