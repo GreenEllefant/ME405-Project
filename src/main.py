@@ -1,10 +1,10 @@
-"""!
+"""! 
 @file main.py
-    This file contains the multitasking for controlling and firing the turret
-
-@author Jack Ellsworth, Hannah Howe, Mathew Smith
-@date   14-Mar-2023
-@copyright (c) 2023 by Nobody and released under GNU Public License v3
+    This file contains the main
+    
+    @author Jack Ellsworth, Hannah Howe, Mathew Smith
+    @date   14-Mar-2023
+    @copyright (c) 2023 by Nobody and released under GNU Public License v3
 """
 import utime
 import gc
