@@ -107,12 +107,24 @@ class PI_Control:
         self.Kp = Kp
 
     def set_Ki(self, Ki):
+        """!
+        Sets a new controller gain
+        @param Ki: The new controller gain
+        """
         self.Ki = Ki
         
     def set_Kd(self, Kd):
+        """!
+        Sets a new controller gain
+        @param Kd: The new controller gain
+        """
         self.Kd = Kd
         
     def set_freq(self, freq):
+        """!
+        Sets a new controller freq
+        @param Kp: The new controller freq
+        """
         self.freq = freq
 
     def print_values(self):
@@ -123,17 +135,27 @@ class PI_Control:
             print(str(self.values[0][i]) + "," + str(self.values[1][i]))
         
     def get_pwm(self):
-        #print(self.setpoint - self.encoder.read())
-        #print(self.pwm)
+        """!
+        Print the total pwm
+        """
         pass
     
     def get_pwm_P(self):
+        """!
+        Print the protional pwm
+        """
         print(self.pwm_P)
         
     def get_pwm_I(self):
+        """!
+        Print the integral pwm
+        """
         print(self.pwm_I)
         
     def get_pwm_D(self):
+        """!
+        Print the differential pwm
+        """
         print(self.pwm_D)
         
 # Run this test code when the file is run

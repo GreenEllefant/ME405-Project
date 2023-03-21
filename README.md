@@ -19,7 +19,7 @@ The acrylic base plate (blue) was laser cut and contains extra mounting slots si
 The thermal camera is mounted to the base of the turn table, ensuring that it is always facing the same position, not matter how the gun rotates. This is due to the rules of the competition that this turret competed in, as the target was only given to be in front of the turret.
 
 
-![motor_driver_circuit](img/motor_driver_circuit.png)
+<p align="center"> <img src = img/motor_driver_circuit.png> </p>
 <p align=center> <b> Figure 3: </b> Motor Driver Circuit
 
 The microcontroller and the breadboard circuit for firing the gun are attached to the same turntable as the stand. The firing circuit is composed of two switches that connect directly to the two motors of the blaster; one motor for the piston that loads the dart and one for running the flywheel that propels the dart out of the blaster. The switches are set up to be simple motor driver circuits with logic level, NMOS transistors. The gate of the NMOS' are connected to the STM32 and use a 3.3V output pulse to turn on the switch. The switch is driving the motor in series and has a flyback diode to protect from a potential voltage spike within the circuit.
