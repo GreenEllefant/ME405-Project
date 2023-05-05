@@ -18,10 +18,7 @@ The acrylic base plate (blue) was laser cut, and contains extra mounting slots s
 
 The thermal camera is mounted to the base of the turn table, ensuring that it is always facing the same position, not matter how the gun rotates. This is due to the rules of the competition that this turret competed in, as the target was only given to be in front of the turret.
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 3695a7832d707b57049cc9815ea3485da12e4a5b
 <p align="center"> <img src = img/motor_driver_circuit.png> </p>
 <p align=center> <b> Figure 3: </b> Motor Driver Circuit
 
